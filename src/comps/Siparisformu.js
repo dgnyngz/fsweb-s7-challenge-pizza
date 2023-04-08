@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -82,103 +82,113 @@ export default function SiparisFormu() {
       });
   };
   return (
-    <div>
-      <header>
-        <h2>Teknolojik Yemekler</h2>
-        <Link to="/">Anasayfa</Link>-Sipariş Oluştur
-      </header>
-      <div className="body">
-        <h3>Position Absolute Acı Pizza</h3>
-        <h2>85.50&#8378;</h2>
-        <p>
-          Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı
-          pizza tam sana göre.Pizza,domates,peynir ve genellikle çeşitli diğer
-          malzemelerle kaplanmış,daha sonra geleneksel olarak odun ateşinde bir
-          fırında yüksek sıcaklıkta pişirilen,genellikle yuvarlak,düzleştirilmiş
-          mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir
-          yemektir.Küçük bir pizzaya bazen pizzetta denir.
-        </p>
-        <div className="radio">
-          <h3>Boyut Seç *</h3>
-          <form>
-            <label>
-              <input
-                type="radio"
-                name="boyut"
-                value="Küçük"
-                onChange={handleChange}
-              />
-              Küçük
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="boyut"
-                value="Orta"
-                onChange={handleChange}
-              />
-              Orta
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="boyut"
-                value="Büyük"
-                onChange={handleChange}
-              />
-              Büyük
-            </label>
-          </form>
-        </div>
-        <div className="dropdown">
-          <label>
-            Hamur Seç*
-            <select
-              name="hamur"
-              id="size-dropdown"
-              onChange={handleChangeHamur}
-            >
-              <option value="">Hamur Seçin</option>
-              <option value="İnce">İnce</option>
-              <option value="Normal">Normal</option>
-              <option value="Kalın">Kalın</option>
-            </select>
-          </label>
-        </div>
-        <div className="checkbox">
-          <form>
-            <h3>Ek Malzemeler</h3>
-            <p>En Fazla 10 malzeme seçebilirsiniz. 5&#8378;</p>
-            {options.map((option) => (
-              <label key={option}>
+    <div className="siparis">
+      <div className="icerik">
+        <header>
+          <h2>Teknolojik Yemekler</h2>
+          <div>
+            <Link to="/" className="anasayfa-link">
+              Anasayfa
+            </Link>
+            -Sipariş Oluştur
+          </div>
+        </header>
+        <div className="body">
+          <h3>Position Absolute Acı Pizza</h3>
+          <h2>85.50&#8378;</h2>
+          <p>
+            Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı
+            pizza tam sana göre.Pizza,domates,peynir ve genellikle çeşitli diğer
+            malzemelerle kaplanmış,daha sonra geleneksel olarak odun ateşinde
+            bir fırında yüksek sıcaklıkta pişirilen,genellikle
+            yuvarlak,düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan
+            kökenli lezzetli bir yemektir.Küçük bir pizzaya bazen pizzetta
+            denir.
+          </p>
+          <div className="radio">
+            <h3>Boyut Seç *</h3>
+            <form>
+              <label>
                 <input
-                  type="checkbox"
-                  name="malzemeler"
-                  value={option}
-                  onChange={handleMalzemeChange}
+                  type="radio"
+                  name="boyut"
+                  value="Küçük"
+                  onChange={handleChange}
                 />
-                {option}
+                Küçük
               </label>
-            ))}
-          </form>
-          <div className="not">
+              <label>
+                <input
+                  type="radio"
+                  name="boyut"
+                  value="Orta"
+                  onChange={handleChange}
+                />
+                Orta
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="boyut"
+                  value="Büyük"
+                  onChange={handleChange}
+                />
+                Büyük
+              </label>
+            </form>
+          </div>
+          <div className="dropdown">
             <label>
-              <h3>Sipariş Notu</h3>
-              <input type="text" name="name" onChange={handleSiparisNotu} />
+              Hamur Seç*
+              <select
+                name="hamur"
+                id="size-dropdown"
+                onChange={handleChangeHamur}
+              >
+                <option value="">Hamur Seçin</option>
+                <option value="İnce">İnce</option>
+                <option value="Normal">Normal</option>
+                <option value="Kalın">Kalın</option>
+              </select>
             </label>
           </div>
-          <div className="adet">
-            <button onClick={adetazalt}>-</button>
-            <p>{count}</p>
-            <button onClick={adetarttır}>+</button>
-          </div>
-          <div className="fiyat">
-            <h3>Sipariş Toplamı</h3>
-            <p>Seçimler {secilenMalzemeler.length * 5 * count}&#8378;</p>
-            <p>{(85.5 + secilenMalzemeler.length * 5) * count}&#8378;</p>
-            <button id="order-button" type="submit" onClick={handleSubmit}>
-              Sipariş Ver
-            </button>
+          <div className="checkbox">
+            <form>
+              <h3>Ek Malzemeler</h3>
+              <p>En Fazla 10 malzeme seçebilirsiniz. 5&#8378;</p>
+              {options.map((option) => (
+                <label key={option}>
+                  <input
+                    type="checkbox"
+                    name="malzemeler"
+                    value={option}
+                    onChange={handleMalzemeChange}
+                  />
+                  {option}
+                </label>
+              ))}
+            </form>
+            <div className="not">
+              <label>
+                <h3>Sipariş Notu</h3>
+                <input type="text" name="name" onChange={handleSiparisNotu} />
+              </label>
+            </div>
+            <div className="adet">
+              <button onClick={adetazalt}>-</button>
+              <p>{count}</p>
+              <button onClick={adetarttır}>+</button>
+            </div>
+            <div className="fiyat">
+              <h3>Sipariş Toplamı</h3>
+              <p>Seçimler {secilenMalzemeler.length * 5 * count}&#8378;</p>
+              <p>
+                Toplam {(85.5 + secilenMalzemeler.length * 5) * count}&#8378;
+              </p>
+              <button id="order-button" type="submit" onClick={handleSubmit}>
+                Sipariş Ver
+              </button>
+            </div>
           </div>
         </div>
       </div>

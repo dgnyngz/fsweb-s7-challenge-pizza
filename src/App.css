@@ -24,3 +24,24 @@ header {
   padding: 10px 40px;
   text-decoration: none;
 }
+.siparis {
+  width: 40%;
+  margin: auto;
+}
+header div {
+  text-align: start;
+  margin: 10px;
+  margin-top: 50px;
+  color: white;
+  text-decoration: none;
+}
+header h2 {
+  color: white;
+  padding-top: 40px;
+  font-family: "Barlow", sans-serif;
+  font-size: 36px;
+}
+.anasayfa-link {
+  color: white;
+  text-decoration: none;
+}
