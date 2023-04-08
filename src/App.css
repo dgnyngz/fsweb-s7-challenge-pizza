@@ -5,14 +5,32 @@
 }
 header {
   background-color: #ce2829;
-  height: 15vh;
+  height: 15%;
+  width: 100%;
 }
 
 .anasayfa {
   text-align: center;
   background-image: url("/mvp-banner.png");
+  background-repeat: no-repeat;
+
   height: 100vh;
   width: 100vw;
+}
+.anasayfa h2 {
+  font-size: 55px;
+  padding: 70px;
+  color: antiquewhite;
+}
+.anasayfa p {
+  font-size: 55px;
+  padding: 30px;
+  color: antiquewhite;
+}
+.anasayfa link {
+  font-size: 55px;
+  padding: 70px;
+  color: antiquewhite;
 }
 
 .App {
@@ -21,11 +39,12 @@ header {
 .anasayfabuton {
   background-color: #fdc913;
   border-radius: 30px;
-  padding: 10px 40px;
+  padding: 25px 80px;
   text-decoration: none;
+  color: rgb(137, 84, 15);
 }
 .siparis {
-  width: 40%;
+  width: 30%;
   margin: auto;
 }
 header div {
@@ -34,6 +53,7 @@ header div {
   margin-top: 50px;
   color: white;
   text-decoration: none;
+  padding-bottom: 5px;
 }
 header h2 {
   color: white;
@@ -44,4 +64,133 @@ header h2 {
 .anasayfa-link {
   color: white;
   text-decoration: none;
+}
+.tanıtım h2 {
+  text-align: start;
+}
+.tanıtım h3 {
+  text-align: start;
+  padding: 10px;
+  padding-left: 0;
+}
+.tanıtım p {
+  text-align: start;
+  padding: 20px 0px;
+}
+.radio {
+  display: flex;
+  justify-content: space-between;
+}
+.radio h3 {
+  text-align: start;
+}
+
+.radioButtons {
+  display: flex;
+  flex-direction: column;
+}
+.radioButtons div {
+  text-align: start;
+}
+.radioButtons form {
+  padding: 20px 0px;
+}
+.radioButtons form label div {
+  padding: 0 0 5px 0;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+}
+.dropdown div {
+  text-align: start;
+
+  margin-right: 70px;
+}
+.dropdown div h2 {
+  font-size: 1.17em;
+  text-align: start;
+}
+.checkbox {
+  display: flex;
+}
+.checkbox h3 {
+  text-align: start;
+}
+.checkbox p {
+  text-align: start;
+}
+.parentkutucuklar {
+  display: flex;
+}
+
+.kutucuklar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.kutucuklar label {
+  width: 30%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: start;
+}
+
+.not label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  text-align: start;
+  border: 1px solid #837f7f;
+}
+.not label h3 {
+  text-align: start;
+}
+.adet {
+  display: flex;
+  width: 150px;
+  margin: 20px 10px;
+  border: black;
+}
+
+.adet button {
+  flex: 3;
+  background-color: #fdc913;
+  border-radius: 5px;
+  height: 40px;
+}
+
+.adet p {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex: 2;
+}
+.alt {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.fiyat {
+  border: 1px solid #837f7f;
+  border-radius: 5px;
+  text-align: start;
+  width: 50%;
+}
+.fiyat p {
+  text-align: start;
+  padding: 5px 20px;
+}
+.fiyat h3 {
+  text-align: start;
+  padding: 20px 20px;
+}
+#order-button {
+  width: 100%;
+  background-color: #fdc913;
+  border-radius: 5px;
+  height: 50px;
+  border: 1px solid #837f7f;
 }

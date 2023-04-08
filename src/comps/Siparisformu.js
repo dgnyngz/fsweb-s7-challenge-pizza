@@ -94,86 +94,106 @@ export default function SiparisFormu() {
           </div>
         </header>
         <div className="body">
-          <h3>Position Absolute Acı Pizza</h3>
-          <h2>85.50&#8378;</h2>
-          <p>
-            Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı
-            pizza tam sana göre.Pizza,domates,peynir ve genellikle çeşitli diğer
-            malzemelerle kaplanmış,daha sonra geleneksel olarak odun ateşinde
-            bir fırında yüksek sıcaklıkta pişirilen,genellikle
-            yuvarlak,düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan
-            kökenli lezzetli bir yemektir.Küçük bir pizzaya bazen pizzetta
-            denir.
-          </p>
-          <div className="radio">
-            <h3>Boyut Seç *</h3>
-            <form>
-              <label>
-                <input
-                  type="radio"
-                  name="boyut"
-                  value="Küçük"
-                  onChange={handleChange}
-                />
-                Küçük
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="boyut"
-                  value="Orta"
-                  onChange={handleChange}
-                />
-                Orta
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="boyut"
-                  value="Büyük"
-                  onChange={handleChange}
-                />
-                Büyük
-              </label>
-            </form>
+          <div className="tanıtım">
+            <h3>Position Absolute Acı Pizza</h3>
+            <h2>85.50&#8378;</h2>
+            <p>
+              Frontend Dev olarak hala position:absolute kullanıyorsan bu çok
+              acı pizza tam sana göre.Pizza,domates,peynir ve genellikle çeşitli
+              diğer malzemelerle kaplanmış,daha sonra geleneksel olarak odun
+              ateşinde bir fırında yüksek sıcaklıkta pişirilen,genellikle
+              yuvarlak,düzleştirilmiş mayalı buğday bazlı hamurdan oluşan
+              İtalyan kökenli lezzetli bir yemektir.Küçük bir pizzaya bazen
+              pizzetta denir.
+            </p>
           </div>
-          <div className="dropdown">
-            <label>
-              Hamur Seç*
-              <select
-                name="hamur"
-                id="size-dropdown"
-                onChange={handleChangeHamur}
-              >
-                <option value="">Hamur Seçin</option>
-                <option value="İnce">İnce</option>
-                <option value="Normal">Normal</option>
-                <option value="Kalın">Kalın</option>
-              </select>
-            </label>
+          <div className="radio">
+            <div className="radioButtons">
+              <h3>Boyut Seç *</h3>
+              <form>
+                <label>
+                  <div>
+                    <input
+                      type="radio"
+                      name="boyut"
+                      value="Küçük"
+                      onChange={handleChange}
+                    />
+                    Küçük
+                  </div>
+                </label>
+                <label>
+                  <div>
+                    <input
+                      type="radio"
+                      name="boyut"
+                      value="Orta"
+                      onChange={handleChange}
+                    />
+                    Orta
+                  </div>
+                </label>
+                <label>
+                  <div>
+                    <input
+                      type="radio"
+                      name="boyut"
+                      value="Büyük"
+                      onChange={handleChange}
+                    />
+                    Büyük
+                  </div>
+                </label>
+              </form>
+            </div>
+
+            <div className="dropdown">
+              <div>
+                <label>
+                  <h2>Hamur Seç*</h2>
+                  <select
+                    name="hamur"
+                    id="size-dropdown"
+                    onChange={handleChangeHamur}
+                  >
+                    <option value="">Hamur Kalınlığı</option>
+                    <option value="İnce">İnce</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Kalın">Kalın</option>
+                  </select>
+                </label>
+              </div>
+            </div>
           </div>
           <div className="checkbox">
-            <form>
-              <h3>Ek Malzemeler</h3>
-              <p>En Fazla 10 malzeme seçebilirsiniz. 5&#8378;</p>
-              {options.map((option) => (
-                <label key={option}>
-                  <input
-                    type="checkbox"
-                    name="malzemeler"
-                    value={option}
-                    onChange={handleMalzemeChange}
-                  />
-                  {option}
-                </label>
-              ))}
-            </form>
-            <div className="not">
-              <label>
-                <h3>Sipariş Notu</h3>
-                <input type="text" name="name" onChange={handleSiparisNotu} />
-              </label>
+            <div className="parentkutucuklar">
+              <form>
+                <h3>Ek Malzemeler</h3>
+                <p>En Fazla 10 malzeme seçebilirsiniz. 5&#8378;</p>
+                <div className="kutucuklar">
+                  {options.map((option) => (
+                    <label key={option}>
+                      <input
+                        type="checkbox"
+                        name="malzemeler"
+                        value={option}
+                        onChange={handleMalzemeChange}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              </form>
             </div>
+          </div>
+
+          <div className="not">
+            <label>
+              <h3>Sipariş Notu</h3>
+              <input type="text" name="name" onChange={handleSiparisNotu} />
+            </label>
+          </div>
+          <div className="alt">
             <div className="adet">
               <button onClick={adetazalt}>-</button>
               <p>{count}</p>
