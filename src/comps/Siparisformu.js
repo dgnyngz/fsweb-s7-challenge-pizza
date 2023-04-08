@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const options = [
   "Pepperoni",
@@ -23,6 +24,7 @@ export default function SiparisFormu() {
   const [hamur, setHamur] = useState();
   const [siparisNotu, setSiparisNotu] = useState("");
   const [count, setCount] = useState(1);
+  const [boyut, setBoyut] = useState();
 
   function adetarttır() {
     setCount(count + 1);
@@ -36,7 +38,7 @@ export default function SiparisFormu() {
   function handleSiparisNotu(e) {
     setSiparisNotu(e.target.value);
   }
-  console.log(siparisNotu);
+  //console.log(siparisNotu);
 
   function handleChangeHamur(e) {
     setHamur(e.target.value);
@@ -44,8 +46,8 @@ export default function SiparisFormu() {
   }
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    console.log(name, value);
+    const { value } = e.target;
+    setBoyut(value);
   }
   function handleMalzemeChange(e) {
     const { value } = e.target;
@@ -61,8 +63,24 @@ export default function SiparisFormu() {
     }
 
     setSecilenMalzemeler(yeniSecilenMalzemeler);
-    console.log(yeniSecilenMalzemeler);
+    //console.log(yeniSecilenMalzemeler);
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://reqres.in/api/orders", {
+        Malzemeler: secilenMalzemeler,
+        Not: siparisNotu,
+        Hamur: hamur,
+        Boyut: boyut,
+      })
+      .then(function(response) {
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <header>
@@ -87,7 +105,7 @@ export default function SiparisFormu() {
               <input
                 type="radio"
                 name="boyut"
-                value="kücük"
+                value="Küçük"
                 onChange={handleChange}
               />
               Küçük
@@ -96,7 +114,7 @@ export default function SiparisFormu() {
               <input
                 type="radio"
                 name="boyut"
-                value="orta"
+                value="Orta"
                 onChange={handleChange}
               />
               Orta
@@ -105,7 +123,7 @@ export default function SiparisFormu() {
               <input
                 type="radio"
                 name="boyut"
-                value="büyük"
+                value="Büyük"
                 onChange={handleChange}
               />
               Büyük
@@ -158,7 +176,7 @@ export default function SiparisFormu() {
             <h3>Sipariş Toplamı</h3>
             <p>Seçimler {secilenMalzemeler.length * 5 * count}&#8378;</p>
             <p>{(85.5 + secilenMalzemeler.length * 5) * count}&#8378;</p>
-            <button id="order-button" type="submit">
+            <button id="order-button" type="submit" onClick={handleSubmit}>
               Sipariş Ver
             </button>
           </div>
