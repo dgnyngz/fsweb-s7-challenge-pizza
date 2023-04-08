@@ -8,22 +8,24 @@ import {
 import Anasayfa from "./comps/Anasayfa";
 import SiparisFormu from "./comps/Siparisformu";
 import "./App.css";
+import Basarili from "./comps/Basarili";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Router>
-          <div>
-            <Switch>
-              <Route path="/pizza">
-                <SiparisFormu />
-              </Route>
-              <Route path="/">
-                <Anasayfa />
-              </Route>
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/pizza">
+              <SiparisFormu />
+            </Route>
+            <Route path="/anasayfa">
+              <Anasayfa />
+            </Route>
+            <Route path="/basarili">
+              <Basarili />
+            </Route>
+          </Switch>
         </Router>
       </BrowserRouter>
     </>

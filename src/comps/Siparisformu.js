@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { useHistory } from "react-router-dom";
+
 const options = [
   "Pepperoni",
   "Sosis",
@@ -25,7 +27,7 @@ export default function SiparisFormu() {
   const [siparisNotu, setSiparisNotu] = useState("");
   const [count, setCount] = useState(1);
   const [boyut, setBoyut] = useState();
-
+  const [adres, setAdres] = useState("");
   function adetarttır() {
     setCount(count + 1);
   }
@@ -39,7 +41,9 @@ export default function SiparisFormu() {
     setSiparisNotu(e.target.value);
   }
   //console.log(siparisNotu);
-
+  function handleAdres(e) {
+    setAdres(e.target.value);
+  }
   function handleChangeHamur(e) {
     setHamur(e.target.value);
     //console.log("seçilen hamur", hamur);
@@ -73,21 +77,24 @@ export default function SiparisFormu() {
         Not: siparisNotu,
         Hamur: hamur,
         Boyut: boyut,
+        Adres: adres,
       })
       .then(function(response) {
         console.log(response.data);
+        history.push("/basarili");
       })
       .catch(function(error) {
         console.log(error);
       });
   };
+  const history = useHistory();
   return (
     <div className="siparis">
       <div className="icerik">
         <header>
           <h2>Teknolojik Yemekler</h2>
           <div>
-            <Link to="/" className="anasayfa-link">
+            <Link to="/anasayfa" className="anasayfa-link">
               Anasayfa
             </Link>
             -Sipariş Oluştur
@@ -193,6 +200,12 @@ export default function SiparisFormu() {
               <input type="text" name="name" onChange={handleSiparisNotu} />
             </label>
           </div>
+          <div className="not">
+            <label>
+              <h3>Adres</h3>
+              <input type="text" name="name" onChange={handleAdres} />
+            </label>
+          </div>
           <div className="alt">
             <div className="adet">
               <button onClick={adetazalt}>-</button>
@@ -201,10 +214,30 @@ export default function SiparisFormu() {
             </div>
             <div className="fiyat">
               <h3>Sipariş Toplamı</h3>
-              <p>Seçimler {secilenMalzemeler.length * 5 * count}&#8378;</p>
               <p>
-                Toplam {(85.5 + secilenMalzemeler.length * 5) * count}&#8378;
+                <div className="fiyatlar">
+                  <div>
+                    <div>Seçimler</div>{" "}
+                    <div>
+                      {" "}
+                      {secilenMalzemeler.length * 5 * count}
+                      &#8378;
+                    </div>
+                  </div>
+                </div>
               </p>
+              <p>
+                <div className="fiyatlar">
+                  <div>
+                    <div>Toplam</div>{" "}
+                    <div>
+                      {(85.5 + secilenMalzemeler.length * 5) * count}
+                      &#8378;
+                    </div>
+                  </div>
+                </div>
+              </p>
+
               <button id="order-button" type="submit" onClick={handleSubmit}>
                 Sipariş Ver
               </button>
