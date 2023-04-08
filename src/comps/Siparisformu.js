@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -28,6 +28,7 @@ export default function SiparisFormu() {
   const [count, setCount] = useState(1);
   const [boyut, setBoyut] = useState();
   const [adres, setAdres] = useState("");
+  const [fiyat, setFiyat] = useState(0);
   function adetarttır() {
     setCount(count + 1);
   }
@@ -36,7 +37,12 @@ export default function SiparisFormu() {
       setCount(count - 1);
     }
   }
-
+  function fiyatAyarla() {
+    setFiyat(secilenMalzemeler.length * 5 * count);
+  }
+  useEffect(() => {
+    fiyatAyarla();
+  }, [secilenMalzemeler, count]);
   function handleSiparisNotu(e) {
     setSiparisNotu(e.target.value);
   }
@@ -78,6 +84,7 @@ export default function SiparisFormu() {
         Hamur: hamur,
         Boyut: boyut,
         Adres: adres,
+        Fiyat: fiyat * count + 85.5 * count,
       })
       .then(function(response) {
         console.log(response.data);
@@ -220,7 +227,7 @@ export default function SiparisFormu() {
                     <div>Seçimler</div>{" "}
                     <div>
                       {" "}
-                      {secilenMalzemeler.length * 5 * count}
+                      {fiyat}
                       &#8378;
                     </div>
                   </div>
@@ -231,7 +238,7 @@ export default function SiparisFormu() {
                   <div>
                     <div>Toplam</div>{" "}
                     <div>
-                      {(85.5 + secilenMalzemeler.length * 5) * count}
+                      {(85.5 + fiyat) * count}
                       &#8378;
                     </div>
                   </div>
