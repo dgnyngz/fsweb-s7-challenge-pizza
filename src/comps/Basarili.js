@@ -10,7 +10,7 @@ export default function Basarili() {
           <p>SİPARİŞİNİZ BAŞARIYLA ALINDI!</p>
         </div>
         <div>
-          <Link to="/anasayfa" className="geridön">
+          <Link to="/" className="geridön">
             Anasayfa
           </Link>
         </div>

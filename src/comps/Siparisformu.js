@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import * as yup from "yup";
+import * as Yup from "yup";
 
 import { useHistory } from "react-router-dom";
 
@@ -30,9 +30,28 @@ export default function SiparisFormu() {
   const [boyut, setBoyut] = useState();
   const [adres, setAdres] = useState("");
   const [fiyat, setFiyat] = useState(0);
+  const [error, setError] = useState("");
+
   function adetarttır() {
     setCount(count + 1);
   }
+  /*const [formDatası, setFormDatası] = useState({
+    Malzemeler: [],
+    Not: "",
+    Hamur: "",
+    Boyut: "",
+    Adres: "",
+    Fiyat: 0,
+  });
+setFormDatası({
+    Malzemeler: secilenMalzemeler,
+    Not: siparisNotu,
+    Hamur: hamur,
+    Boyut: boyut,
+    Adres: adres,
+    Fiyat: fiyat * count + 85.5 * count,
+  });*/
+
   function adetazalt() {
     if (count > 1) {
       setCount(count - 1);
@@ -62,12 +81,10 @@ export default function SiparisFormu() {
   }
   function handleMalzemeChange(e) {
     const { value } = e.target;
-    const yeniSecilenMalzemeler = [...secilenMalzemeler]; // mevcut secilenMalzemeler dizisini kopyala
+    const yeniSecilenMalzemeler = [...secilenMalzemeler];
     if (e.target.checked) {
-      // eğer checkbox işaretlenirse, malzemeyi yeniSecilenMalzemeler dizisine ekle
       yeniSecilenMalzemeler.push(value);
     } else if (!e.target.checked) {
-      // eğer checkbox işareti kaldırılırsa, malzemeyi yeniSecilenMalzemeler dizisinden çıkar
       if (yeniSecilenMalzemeler.includes(value)) {
         yeniSecilenMalzemeler.splice(yeniSecilenMalzemeler.indexOf(value), 1);
       }
@@ -78,23 +95,55 @@ export default function SiparisFormu() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://reqres.in/api/orders", {
-        Malzemeler: secilenMalzemeler,
-        Not: siparisNotu,
-        Hamur: hamur,
-        Boyut: boyut,
-        Adres: adres,
-        Fiyat: fiyat * count + 85.5 * count,
+    const formData = {
+      Malzemeler: secilenMalzemeler,
+      Not: siparisNotu,
+      Hamur: hamur,
+      Boyut: boyut,
+      Adres: adres,
+      Fiyat: fiyat * count + 85.5 * count,
+    };
+    console.log(formData);
+    const formSchema = Yup.object().shape({
+      Malzemeler: Yup.array()
+        .min(1, "En az bir malzeme seçiniz")
+        .max(10, "En fazla 10 malzeme seçebilirsiniz")
+        .required("Malzeme alanı boş bırakılamaz"),
+      Not: Yup.string(),
+      Hamur: Yup.string().required("Hamur tipi seçiniz"),
+      Boyut: Yup.string().required("Pizza boyutu seçiniz"),
+      Adres: Yup.string().required("Adres alanı boş bırakılamaz"),
+    });
+    formSchema
+      .validate(formData)
+      .then(() => {
+        // form verileri geçerli olduğu durumda burası çalışır
+        console.log("Form verileri geçerli!");
+        // formu gönderme işlemini burada gerçekleştirin
+        axios
+          .post("https://reqres.in/api/orders", {
+            Malzemeler: secilenMalzemeler,
+            Not: siparisNotu,
+            Hamur: hamur,
+            Boyut: boyut,
+            Adres: adres,
+            Fiyat: (fiyat + 85.5) * count,
+          })
+          .then(function(response) {
+            console.log(response.data);
+            history.push("/basarili");
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       })
-      .then(function(response) {
-        console.log(response.data);
-        history.push("/basarili");
-      })
-      .catch(function(error) {
-        console.log(error);
+      .catch((err) => {
+        console.log("Form verileri geçersiz: ", err.errors);
+
+        setError(err.errors);
       });
   };
+
   const history = useHistory();
   return (
     <div className="siparis">
@@ -102,12 +151,13 @@ export default function SiparisFormu() {
         <header>
           <h2>Teknolojik Yemekler</h2>
           <div>
-            <Link to="/anasayfa" className="anasayfa-link">
+            <Link to="/" className="anasayfa-link">
               Anasayfa
             </Link>
             -Sipariş Oluştur
           </div>
         </header>
+
         <div className="body">
           <div className="tanıtım">
             <h3>Position Absolute Acı Pizza</h3>
@@ -122,6 +172,7 @@ export default function SiparisFormu() {
               pizzetta denir.
             </p>
           </div>
+
           <div className="radio">
             <div className="radioButtons">
               <h3>Boyut Seç *</h3>
@@ -201,17 +252,17 @@ export default function SiparisFormu() {
               </form>
             </div>
           </div>
-
+          {error && <section>{error}</section>}
           <div className="not">
             <label>
               <h3>Sipariş Notu</h3>
-              <input type="text" name="name" onChange={handleSiparisNotu} />
+              <input type="text" name="not" onChange={handleSiparisNotu} />
             </label>
           </div>
           <div className="not">
             <label>
               <h3>Adres</h3>
-              <input type="text" name="name" onChange={handleAdres} />
+              <input type="text" name="adres" onChange={handleAdres} />
             </label>
           </div>
           <div className="alt">
@@ -220,6 +271,7 @@ export default function SiparisFormu() {
               <p>{count}</p>
               <button onClick={adetarttır}>+</button>
             </div>
+
             <div className="fiyat">
               <h3>Sipariş Toplamı</h3>
               <p>

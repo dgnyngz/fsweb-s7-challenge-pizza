@@ -19,7 +19,7 @@ const App = () => {
             <Route path="/pizza">
               <SiparisFormu />
             </Route>
-            <Route path="/anasayfa">
+            <Route exact path="/">
               <Anasayfa />
             </Route>
             <Route path="/basarili">
