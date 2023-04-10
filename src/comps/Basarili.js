@@ -16,28 +16,53 @@ export default function Basarili() {
       <div className="basarili">
         <div>
           <h2>Teknolojik Yemekler</h2>
-          <p className="lezzet">lezzetin yolda</p>
+          <div className="lezzet">lezzetin yolda</div>
           <p>SİPARİŞİNİZ BAŞARIYLA ALINDI!</p>
           <hr></hr>
-          <p>Boyut : {formDatası.Boyut}</p>
-          <p>
-            Malzemeler:{" "}
-            {formDatası.Malzemeler.map((malz, index) => (
-              <span>
-                {malz}
-                {index !== formDatası.Malzemeler.length - 1 && ", "}
-              </span>
-            ))}
-          </p>
-          <p>Not: {formDatası.Not}</p>
+          <h2>Position Absolute Acı Pizza</h2>
+          <div className="malzemeler">
+            <p>
+              Boyut : <b>{formDatası.Boyut}</b>
+            </p>
+            <p>
+              Malzemeler:{" "}
+              <b>
+                {formDatası.Malzemeler.map((malz, index) => (
+                  <span>
+                    {malz}
+                    {index !== formDatası.Malzemeler.length - 1 && ", "}
+                  </span>
+                ))}
+              </b>
+            </p>
+            <p>
+              Not: <b>{formDatası.Not}</b>
+            </p>
 
-          <p> Hamur: {formDatası.Hamur}</p>
-          <p>Adres: {formDatası.Adres}</p>
-          <p>Fiyat: {newFiyat} &#8378;</p>
+            <p>
+              {" "}
+              Hamur: <b>{formDatası.Hamur}</b>
+            </p>
+            <p>
+              Adres: <b>{formDatası.Adres}</b>
+            </p>
+          </div>
+          <div className="toplam">
+            <div>
+              <h2>Sipariş Toplamı</h2>
+              <p>
+                Seçimler: {formDatası.Malzemeler.length * 5 * formDatası.Count}{" "}
+                &#8378;{" "}
+              </p>
+              <p>
+                Toplam: <b>{newFiyat} &#8378;</b>
+              </p>
+            </div>
+          </div>
           <div className="kupon">
-            {formDatası.Fiyat >= 500 && (
+            {formDatası.Fiyat >= 300 && (
               <button onClick={fiyatdegistir}>
-                %15 İndirim Kuponu Kazandın <div>Kullanmak İçin Tıklayın!</div>
+                %15 İndirim Kuponu Kazandın <div>Kullanmak İçin Tıkla!</div>
               </button>
             )}
           </div>

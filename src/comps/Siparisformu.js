@@ -38,7 +38,7 @@ export default function SiparisFormu() {
     Boyut: "",
     Adres: "",
     Fiyat: 0,
-    count: 0,
+    count: 1,
   });
 
   function adetarttır() {
