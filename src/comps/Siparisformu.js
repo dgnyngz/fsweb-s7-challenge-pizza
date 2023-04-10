@@ -23,7 +23,7 @@ const options = [
 
 export default function SiparisFormu() {
   //const [boyut, setBoyut] = useState();
-  const [secilenMalzemeler, setSecilenMalzemeler] = useState("");
+  const [secilenMalzemeler, setSecilenMalzemeler] = useState([]);
   const [hamur, setHamur] = useState();
   const [siparisNotu, setSiparisNotu] = useState("");
   const [count, setCount] = useState(1);
@@ -31,26 +31,30 @@ export default function SiparisFormu() {
   const [adres, setAdres] = useState("");
   const [fiyat, setFiyat] = useState(0);
   const [error, setError] = useState("");
-
-  function adetarttır() {
-    setCount(count + 1);
-  }
-  /*const [formDatası, setFormDatası] = useState({
-    Malzemeler: [],
+  const [formDatası, setFormDatası] = useState({
+    Malzemeler: [" "],
     Not: "",
     Hamur: "",
     Boyut: "",
     Adres: "",
     Fiyat: 0,
+    count: 0,
   });
-setFormDatası({
-    Malzemeler: secilenMalzemeler,
-    Not: siparisNotu,
-    Hamur: hamur,
-    Boyut: boyut,
-    Adres: adres,
-    Fiyat: fiyat * count + 85.5 * count,
-  });*/
+
+  function adetarttır() {
+    setCount(count + 1);
+  }
+  useEffect(() => {
+    setFormDatası({
+      Malzemeler: secilenMalzemeler,
+      Not: siparisNotu,
+      Hamur: hamur,
+      Boyut: boyut,
+      Adres: adres,
+      Fiyat: fiyat * count + 85.5 * count,
+      Count: count,
+    });
+  }, [secilenMalzemeler, siparisNotu, hamur, boyut, adres, fiyat, count]);
 
   function adetazalt() {
     if (count > 1) {
@@ -95,14 +99,6 @@ setFormDatası({
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {
-      Malzemeler: secilenMalzemeler,
-      Not: siparisNotu,
-      Hamur: hamur,
-      Boyut: boyut,
-      Adres: adres,
-      Fiyat: fiyat * count + 85.5 * count,
-    };
 
     const formSchema = Yup.object().shape({
       Malzemeler: Yup.array()
@@ -115,7 +111,7 @@ setFormDatası({
       Adres: Yup.string().required("Adres alanı boş bırakılamaz"),
     });
     formSchema
-      .validate(formData)
+      .validate(formDatası)
       .then(() => {
         axios
           .post("https://reqres.in/api/orders", {
@@ -128,7 +124,7 @@ setFormDatası({
           })
           .then(function(response) {
             console.log(response.data);
-            history.push("/basarili");
+            history.push("/basarili", { formDatası: formDatası });
           })
           .catch(function(error) {
             console.log(error);

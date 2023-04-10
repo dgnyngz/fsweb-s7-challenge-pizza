@@ -213,6 +213,16 @@ section {
 }
 .basarili {
   background-color: #ce2829;
+  width: 35vw;
+  height: 100vh;
+  margin: auto;
+}
+.lezzet {
+}
+.basarili1 {
+  background-repeat: repeat;
+
+  background-color: #ce2829;
   width: 100vw;
   height: 100vh;
 }
@@ -232,6 +242,17 @@ section {
   background-color: #fdc913;
   font-size: 30px;
 
+  border-radius: 30px;
+  padding: 25px 80px;
+  text-decoration: none;
+  color: rgb(137, 84, 15);
+}
+.kupon button {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #fdc913;
+  font-size: 16px;
+  margin: 60px;
   border-radius: 30px;
   padding: 25px 80px;
   text-decoration: none;
