@@ -23,11 +23,11 @@ const options = [
 
 export default function SiparisFormu() {
   //const [boyut, setBoyut] = useState();
-  const [secilenMalzemeler, setSecilenMalzemeler] = useState([]);
+  const [secilenMalzemeler, setSecilenMalzemeler] = useState("");
   const [hamur, setHamur] = useState();
   const [siparisNotu, setSiparisNotu] = useState("");
   const [count, setCount] = useState(1);
-  const [boyut, setBoyut] = useState();
+  const [boyut, setBoyut] = useState("");
   const [adres, setAdres] = useState("");
   const [fiyat, setFiyat] = useState(0);
   const [error, setError] = useState("");
@@ -103,12 +103,12 @@ setFormDatası({
       Adres: adres,
       Fiyat: fiyat * count + 85.5 * count,
     };
-    console.log(formData);
+
     const formSchema = Yup.object().shape({
       Malzemeler: Yup.array()
         .min(1, "En az bir malzeme seçiniz")
-        .max(10, "En fazla 10 malzeme seçebilirsiniz")
-        .required("Malzeme alanı boş bırakılamaz"),
+        .max(10, "En fazla 10 malzeme seçebilirsiniz"),
+
       Not: Yup.string(),
       Hamur: Yup.string().required("Hamur tipi seçiniz"),
       Boyut: Yup.string().required("Pizza boyutu seçiniz"),
@@ -117,9 +117,6 @@ setFormDatası({
     formSchema
       .validate(formData)
       .then(() => {
-        // form verileri geçerli olduğu durumda burası çalışır
-        console.log("Form verileri geçerli!");
-        // formu gönderme işlemini burada gerçekleştirin
         axios
           .post("https://reqres.in/api/orders", {
             Malzemeler: secilenMalzemeler,
@@ -138,8 +135,6 @@ setFormDatası({
           });
       })
       .catch((err) => {
-        console.log("Form verileri geçersiz: ", err.errors);
-
         setError(err.errors);
       });
   };

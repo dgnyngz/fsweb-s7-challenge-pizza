@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Anasayfa from "./comps/Anasayfa";
 import SiparisFormu from "./comps/Siparisformu";
 import "./App.css";
@@ -14,21 +9,20 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Router>
-          <Switch>
-            <Route path="/pizza">
-              <SiparisFormu />
-            </Route>
-            <Route exact path="/">
-              <Anasayfa />
-            </Route>
-            <Route path="/basarili">
-              <Basarili />
-            </Route>
-          </Switch>
-        </Router>
+        <Switch>
+          <Route path="/pizza">
+            <SiparisFormu />
+          </Route>
+          <Route exact path="/">
+            <Anasayfa />
+          </Route>
+          <Route path="/basarili">
+            <Basarili />
+          </Route>
+        </Switch>
       </BrowserRouter>
     </>
   );
 };
+
 export default App;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export default function Basarili() {
+
+export default function Basarili(props) {
   return (
     <div>
       <div className="basarili">
