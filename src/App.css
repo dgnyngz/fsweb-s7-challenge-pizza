@@ -220,6 +220,7 @@ section {
   background-position: center;
   height: 100vh;
   width: 35vw;
+  padding: 0px;
   margin: auto;
   background-size: cover;
 }
@@ -229,8 +230,8 @@ section {
   background-repeat: repeat;
   font-family: "Quattrocento", serif;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   min-height: 100vh;
 }
 .basarili h2 {
@@ -291,6 +292,9 @@ section {
 
   margin: auto;
   height: 25vh;
+}
+.toplam div {
+  padding: 0;
 }
 .toplam p {
   text-align: start;
