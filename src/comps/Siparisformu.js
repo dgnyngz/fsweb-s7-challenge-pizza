@@ -258,7 +258,9 @@ export default function SiparisFormu() {
           </div>
           <div className="alt">
             <div className="adet">
-              <button onClick={adetazalt}>-</button>
+              <button className="test" onClick={adetazalt}>
+                -
+              </button>
               <p>{count}</p>
               <button onClick={adetarttır}>+</button>
             </div>
