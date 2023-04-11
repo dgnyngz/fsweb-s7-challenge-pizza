@@ -21,13 +21,14 @@ header {
 }
 .anasayfa h2 {
   font-size: 55px;
-  padding: 70px;
+  padding: 30px;
   color: antiquewhite;
 }
 .anasayfa p {
   font-size: 55px;
   padding: 30px;
   color: antiquewhite;
+  margin-bottom: 30px;
 }
 .anasayfa a {
   font-size: 20px;
@@ -43,6 +44,7 @@ header {
 }
 .anasayfabuton {
   background-color: #fdc913;
+
   border-radius: 30px;
   padding: 25px 80px;
   text-decoration: none;
@@ -235,13 +237,13 @@ section {
   min-height: 100vh;
 }
 .basarili h2 {
-  font-size: 55px;
-  padding: 70px;
+  font-size: 32px;
+  padding: 10px;
   color: antiquewhite;
 }
 .basarili p {
-  font-size: 55px;
-  padding: 30px;
+  font-size: 32px;
+  padding: 10px;
   color: antiquewhite;
   margin-bottom: 30px;
 }
@@ -251,30 +253,30 @@ section {
   font-size: 30px;
 
   border-radius: 30px;
-  padding: 25px 80px;
-  text-decoration: none;
+  padding: 15px 70px;
+
   color: rgb(137, 84, 15);
 }
 .kupon button {
   cursor: pointer;
-  text-decoration: none;
+
   background-color: #fdc913;
   font-size: 16px;
-  margin: 60px;
+  margin: 30px;
   border-radius: 30px;
-  padding: 25px 80px;
+  padding: 10px 30px;
   text-decoration: none;
   color: rgb(137, 84, 15);
 }
 .malzemeler p {
-  font-size: 30px;
+  font-size: 16px;
   text-align: start;
   margin: auto;
 
   padding: 0;
 }
 .lezzet {
-  font-size: 45px;
+  font-size: 33px;
   font-family: "Satisfy";
   color: #fdc913;
 }
@@ -291,14 +293,18 @@ section {
   margin-top: 20px;
 
   margin: auto;
-  height: 25vh;
+  height: 20vh;
+}
+.toplam h2 {
+  font-size: 24px;
 }
 .toplam div {
-  padding: 0;
+  margin-top: 10px;
 }
 .toplam p {
   text-align: start;
-  font-size: 36px;
+  font-size: 16px;
   padding: 0px;
+  margin: 20px;
   padding-left: 30px;
 }

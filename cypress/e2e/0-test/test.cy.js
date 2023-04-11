@@ -4,12 +4,12 @@ describe("example to-do app", () => {
   });
 });
 it("Orta butonuna tıklandığında seçili olduğunu doğrula", () => {
-  cy.visit("http://localhost:3000/pizza");
+  cy.visit("http://localhost:3000/pizza"); //sayfaya git
   cy.get('input[name="boyut"][value="Orta"]').click();
   cy.get('input[name="boyut"][value="Orta"]').should("be.checked");
 });
 
-it("changes value when option selected", () => {
+it("kalın değerine tıkladığında value kalın dönüyor mu", () => {
   cy.visit("http://localhost:3000/pizza");
 
   cy.get("#size-dropdown").select("Kalın");
