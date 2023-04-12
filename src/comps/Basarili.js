@@ -5,7 +5,9 @@ import { useState } from "react";
 export default function Basarili() {
   const location = useLocation();
   const formDatası = location.state.formDatası;
+  //300 lira üzerine %15 indirim uygulamak için yeni bir state tanımlandı.
   const [newFiyat, setNewFiyat] = useState(formDatası.Fiyat);
+  // location.state kullanılarak formdatanın bu  sayfasıya taşınması sağlanmıştır.
 
   function fiyatdegistir() {
     setNewFiyat(formDatası.Fiyat * 0.85);
@@ -27,6 +29,9 @@ export default function Basarili() {
             <p>
               Malzemeler:{" "}
               <b>
+                {" "}
+                {/*seçillen malzemeleri mapleyerek hepsini tek tek ekrana yazdırır indek malzemeler listesinin uzunluğuna eşit değilse aralarına 
+                virgül koyar . son malzemeden sonra virgül koymaması için kod eklendi */}
                 {formDatası.Malzemeler.map((malz, index) => (
                   <span>
                     {malz}
@@ -59,6 +64,7 @@ export default function Basarili() {
               </p>
             </div>
           </div>
+          {/* fiyat 300 tlden fazlaysa ekrana kupon butonu çıkarır */}
           <div className="kupon">
             {formDatası.Fiyat >= 300 && (
               <button onClick={fiyatdegistir}>

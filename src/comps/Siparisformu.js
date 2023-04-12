@@ -4,7 +4,7 @@ import axios from "axios";
 import * as Yup from "yup";
 
 import { useHistory } from "react-router-dom";
-
+//malzemeleri map metoduyla yazdırmak için options adında bir aray tanımlandı
 const options = [
   "Pepperoni",
   "Sosis",
@@ -22,7 +22,6 @@ const options = [
 ];
 
 export default function SiparisFormu() {
-  //const [boyut, setBoyut] = useState();
   const [secilenMalzemeler, setSecilenMalzemeler] = useState([]);
   const [hamur, setHamur] = useState();
   const [siparisNotu, setSiparisNotu] = useState("");
@@ -57,10 +56,12 @@ export default function SiparisFormu() {
   }, [secilenMalzemeler, siparisNotu, hamur, boyut, adres, fiyat, count]);
 
   function adetazalt() {
+    // adedin min 1 olması için yazıldı
     if (count > 1) {
       setCount(count - 1);
     }
   }
+  // fonksiyon silindğinde render hatası veriyor ?
   function fiyatAyarla() {
     setFiyat(secilenMalzemeler.length * 5 * count);
   }
@@ -83,12 +84,15 @@ export default function SiparisFormu() {
     const { value } = e.target;
     setBoyut(value);
   }
+  //seçilen malzemeleri stateye ekliyor
   function handleMalzemeChange(e) {
     const { value } = e.target;
     const yeniSecilenMalzemeler = [...secilenMalzemeler];
+    //seçildiyse yeniseçilenlere ekle
     if (e.target.checked) {
       yeniSecilenMalzemeler.push(value);
     } else if (!e.target.checked) {
+      //seçilmeidyse diziden çıkar
       if (yeniSecilenMalzemeler.includes(value)) {
         yeniSecilenMalzemeler.splice(yeniSecilenMalzemeler.indexOf(value), 1);
       }
@@ -99,7 +103,7 @@ export default function SiparisFormu() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    // yup ile seçilmesi gereken kısımlar kullanıcıya bilidirilir
     const formSchema = Yup.object().shape({
       Malzemeler: Yup.array()
         .min(1, "En az bir malzeme seçiniz")
@@ -112,6 +116,7 @@ export default function SiparisFormu() {
     });
     formSchema
       .validate(formDatası)
+      //veriler uygunsa axiosla post atılıyor
       .then(() => {
         axios
           .post("https://reqres.in/api/orders", {
@@ -122,6 +127,8 @@ export default function SiparisFormu() {
             Adres: adres,
             Fiyat: (fiyat + 85.5) * count,
           })
+          //post başarılı şekilde atılırsa history.push ile /basarili adresine yönlendirme yapılır
+          //history push ile birlikte formDatası diğer sayfada kullanılmak için gönderilir
           .then(function(response) {
             console.log(response.data);
             history.push("/basarili", { formDatası: formDatası });
@@ -130,6 +137,7 @@ export default function SiparisFormu() {
             console.log(error);
           });
       })
+      //hata varsa error stati göncellenir
       .catch((err) => {
         setError(err.errors);
       });
@@ -228,6 +236,7 @@ export default function SiparisFormu() {
                 <h3>Ek Malzemeler</h3>
                 <p>En Fazla 10 malzeme seçebilirsiniz. 5&#8378;</p>
                 <div className="kutucuklar">
+                  {/*map yöntemi kullanılarak malzemeleri tek tek yazdırmak yerine tek kodla yazdırıldı */}
                   {options.map((option) => (
                     <label key={option}>
                       <input
@@ -243,6 +252,7 @@ export default function SiparisFormu() {
               </form>
             </div>
           </div>
+          {/*error varsa ekranda gösterilir */}
           {error && <section>{error}</section>}
           <div className="not">
             <label>
