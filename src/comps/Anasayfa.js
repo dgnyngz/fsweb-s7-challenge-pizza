@@ -10,5 +10,5 @@ export default function Anasayfa() {
         ACIKTIM
       </Link>
     </div>
-  );
+  );  
 }
